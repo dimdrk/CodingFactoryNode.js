@@ -70,3 +70,16 @@ exports.update = async(req, res) => {
         res.json({status: false, data: err});
     }
 }
+
+exports.delete = async(req, res) => {
+    const username = req.params.username;
+
+    console.log("Delete user with username ", username);
+
+    try {
+        const result = await User.findOneAndDelete({username: username})
+        res.json({status: true, data: result});
+    } catch(err) {
+        res.json({ status: false, data: err});
+    }
+}
