@@ -24,3 +24,24 @@ exports.findOne = async(req, res) => {
         res.json({ status: false, data: err });
     }
 }
+
+exports.create = async(req, res) => {
+    const username = req.body.username;
+    const products = req.body.products;
+
+    console.log("Insert products to user ", username);
+
+    try {
+        const result = await User.updateOne(
+            { username: username }, 
+            {
+                $push: {
+                    products: products
+                }
+            }    
+        );
+        res.json({ status: true, data: result });
+    } catch(err) {
+        res.json({ status: false, data: err });
+    }
+}
