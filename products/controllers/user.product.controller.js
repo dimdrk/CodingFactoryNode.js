@@ -45,3 +45,25 @@ exports.create = async(req, res) => {
         res.json({ status: false, data: err });
     }
 }
+
+exports.update = async(req, res) => {
+    const username = req.params.username;
+    const product_id = req.body._id;
+    const product_quantity = req.body.quantity;
+
+    console.log("Update product quantity for user ", username);
+
+    try {
+        const result = await User.updateOne(
+            { username: username, "products._id": product_id }, 
+            {
+                $set: {
+                    "products.$.quantity": product_quantity
+                }
+            }    
+        );
+        res.json({ status: true, data: result });
+    } catch(err) {
+        res.json({ status: false, data: err });
+    }
+}
