@@ -45,3 +45,28 @@ exports.create = async(req, res) => {
         res.json({ status: false, data: err});
     }
 }
+
+exports.update = async(req, res) => {
+    const username = req.params.username;
+    console.log("Update user with username ", username);
+
+    const updateUser = {
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
+        address: {
+            area: req.body.address.area,
+            road: req.body.address.road
+        }
+    };
+
+    try {
+        const result = await User.findOneAndUpdate(
+            {username: username},
+            updateUser
+        )
+        res.json({status: true, data: result});
+    } catch (err) {
+        res.json({status: false, data: err});
+    }
+}
