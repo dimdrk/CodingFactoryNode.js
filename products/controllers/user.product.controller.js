@@ -48,8 +48,8 @@ exports.create = async(req, res) => {
 
 exports.update = async(req, res) => {
     const username = req.params.username;
-    const product_id = req.body._id;
-    const product_quantity = req.body.quantity;
+    const product_id = req.body.product._id;
+    const product_quantity = req.body.product.quantity;
 
     console.log("Update product quantity for user ", username);
 
