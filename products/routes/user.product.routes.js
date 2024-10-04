@@ -9,4 +9,6 @@ router.post('/:username/products', userProductController.insertUserProduct);
 router.patch('/:username/products/:id', userProductController.updateUserProduct);
 router.delete('/:username/products/:id', userProductController.deleteUserProduct); 
 
+router.get('/stats1', userProductController.stats1)
+
 module.exports = router;

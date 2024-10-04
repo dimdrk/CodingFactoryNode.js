@@ -88,3 +88,38 @@ exports.deleteUserProduct = async(req, res) => {
         res.json({ status: false, data: err });
     }
 }
+
+exports.stats1 = async(req, res) => {
+    console.log("For all users sum by product add count");
+
+    try {
+        const result = await User.aggregate([
+            {
+                $unwind: "$products"
+            },
+            {
+                $project: {
+                    _id: 1, username: 1, products: 1
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        username: "$username",
+                        product: "$products.product"
+                    },
+                    totalAmount: {
+                        $sum: {
+                            $multiply: ["$products.cost", "$products.quantity"]
+                        }
+                    },
+                    count: {$sum: 1}
+                }
+            }
+        ]
+        );
+        res.json({ status: true, data: result });
+    } catch(err) {
+        res.json({ status: false, data: err });
+    }
+}
