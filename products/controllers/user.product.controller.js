@@ -130,10 +130,17 @@ exports.stats1 = async(req, res) => {
 }
 
 exports.stats2 = async(req, res) => {
-    console.log("Stats2");
+    const username = req.params.username;
+
+    console.log("For all products sum and add count");
 
     try {
         const result = await User.aggregate([
+            {
+                $match: {
+                    username: username
+                }
+            },
             {
                 $unwind: "$products"
             },
