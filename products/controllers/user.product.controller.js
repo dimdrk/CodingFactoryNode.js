@@ -115,6 +115,47 @@ exports.stats1 = async(req, res) => {
                     },
                     count: {$sum: 1}
                 }
+            },
+            {
+                $sort: {
+                    "_id.username": 1, "_id.product": 1
+                }
+            }
+        ]
+        );
+        res.json({ status: true, data: result });
+    } catch(err) {
+        res.json({ status: false, data: err });
+    }
+}
+
+exports.stats2 = async(req, res) => {
+    console.log("Stats2");
+
+    try {
+        const result = await User.aggregate([
+            {
+                $unwind: "$products"
+            },
+            {
+                $project: {
+                    _id: 0,
+                    products: 1
+                }
+            },
+            {
+                $group: {
+                    _id: { product: "$products.product" },
+                    totalAmount: {
+                        $sum: {
+                            $multiply: ["$products.cost", "$products.quantity"]
+                        }
+                    },
+                    count: {$sum: 1}
+                }
+            },
+            {
+                $sort: { "_id.product": 1 }
             }
         ]
         );
