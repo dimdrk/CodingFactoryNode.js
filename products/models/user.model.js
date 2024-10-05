@@ -4,21 +4,21 @@ const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
 let addresSchema = new Schema({
-    area: {type: String},
-    road: {type: String}
-}, {_id: false} );
+    area: { type: String },
+    road: { type: String }
+}, {_id: false })
 
 let phoneSchema = new Schema({
-    type: {type: String},
-    number: {type: String}
-}, {_id: false} );
+    type: { type: String },
+    number: { type: String }
+}, {_id: false})
 
 let productSchema = new Schema({
-    product: {type: String},
-    cost: {type: Number},
-    quantity: {type: Number, required: true },
-    date: {type: Date, default: Date.now}
-});
+    product: { type: String },
+    cost: { type: Number },
+    quantity: { type: Number, required: true },
+    date: { type: Date, default: Date.now}
+})
 
 let userSchema = new Schema({
     username: {
@@ -32,12 +32,12 @@ let userSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required field'],
-        max: 100,
+        max: 100
     },
     name: {
         type: String,
         required: [true, 'Name is required field'],
-        max: 100
+        max: 100,
     },
     surname: {
         type: String,
@@ -53,12 +53,12 @@ let userSchema = new Schema({
         lowercase: true,
         match: [
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            "Email address is not valid"
-        ]
+            "Email address is not valid",
+        ],
     },
     address: addresSchema,
     phone: { type: [phoneSchema], null: true },
-    products: {type: [productSchema], null: true }
+    products: { type: [productSchema], null: true}
 },
 {
     collection: 'users',
@@ -66,4 +66,5 @@ let userSchema = new Schema({
 });
 
 userSchema.plugin(uniqueValidator);
-module.exports = mongoose.model('User', userSchema);
+
+module.exports = mongoose.model('User', userSchema)
