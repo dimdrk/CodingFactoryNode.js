@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const app = express();
 const port = 3000;
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger');
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -16,7 +19,12 @@ const userProduct = require('./routes/user.product.routes')
 
 app.use('/api/user', user);
 // app.use('/api/products', product);
-app.use('/api/user.product', userProduct)
+app.use('/api/user-product', userProduct)
+
+app.use('/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument.options)
+)
 
 app.listen(port, () => {
     console.log("Server is up.");
