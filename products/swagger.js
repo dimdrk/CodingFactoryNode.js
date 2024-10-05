@@ -177,6 +177,7 @@ exports.options = {
                     {
                         "name": "username",
                         "in": "path",
+                        "required": true,
                         "description": "Username of user that we want to delete",
                         "type": "string"
                     }
@@ -185,6 +186,80 @@ exports.options = {
                     "200": {
                         "description": "Delete a user"
                     }
+                }
+            }
+        },
+        "/api/user-product/users/products": {
+            "get": {
+                "tags": ["Users and Products"],
+                "description": "Returns all users with their products",
+                "responses": {
+                    "200": {
+                        "description": "All users with their products"
+                    }
+                }
+            }            
+        },
+        "/api/user-product/{username}/products": {
+            "get": {
+                "tags": ["Users and Products"],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "required": true,
+                        "description": "Username of user to find products",
+                        "type:": "string"
+                    }
+                ],
+                "description": "Username and products",
+                "responses": {
+                    "200": {
+                        "description": "User and Products to find"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Users and Products"],
+                "description": "Username and products",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "required": true,
+                        "description": "Username of user to update products",
+                        "type:": "string"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data to add products",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                        "username": {"type": "string"},
+                                        "products": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "Object",
+                                                "properties": {
+                                                    "product": {"type": "string"},
+                                                    "cost": {"type": "number"},
+                                                    "quantity": {"type": "number"}
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": ["quantity"]
+                                }
+                            }
+                        }
+                    }
+                },                
+                "responses": {
+                    "200": {
+                        "description": "New products to user"
                 }
             }
         }
