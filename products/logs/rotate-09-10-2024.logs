@@ -1,0 +1,13 @@
+{
+  message: 'success in reading all users',
+  level: 'info',
+  label: 'winston custom format',
+  timestamp: '09-10-2024 21:54:26'
+}
+{"label":"winston custom format","level":"info","message":"success in reading all users","timestamp":"09-10-2024 21:57:23"}
+{"label":"winston custom format","level":"info","message":"success in reading all users","timestamp":"09-10-2024 21:58:34"}
+{"label":"winston custom format","level":"error","message":"Error in reading all users","timestamp":"09-10-2024 21:58:34"}
+{"label":"winston custom format","level":"info","message":"success in reading all users","timestamp":"09-10-2024 22:00:33"}
+{"label":"winston custom format","level":"error","message":"Error in reading all users","timestamp":"09-10-2024 22:00:33"}
+{"label":"winston custom format","level":"info","message":"success in reading all users","timestamp":"09-10-2024 22:12:26"}
+{"label":"winston custom format","level":"error","message":"Error in reading all users","timestamp":"09-10-2024 22:12:26"}
