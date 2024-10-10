@@ -39,6 +39,4 @@ app.use(
     swaggerUi.setup(swaggerDocument.options)
 )
 
-app.listen(port, () => {
-    console.log("Server is up.");
-});
+module.exports = app;
