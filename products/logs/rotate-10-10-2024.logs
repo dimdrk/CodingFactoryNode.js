@@ -1,0 +1,2 @@
+{"label":"winston custom format","level":"info","message":"success in reading all users","timestamp":"10-10-2024 10:11:28"}
+{"label":"winston custom format","level":"error","message":"Error in reading all users","timestamp":"10-10-2024 10:11:28"}

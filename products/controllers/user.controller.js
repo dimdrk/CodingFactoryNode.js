@@ -8,9 +8,9 @@ exports.findAll = async(req, res) => {
         const result = await User.find();
         logger.info('success in reading all users');
         logger.error("Error in reading all users")
-        res.json({ status: true, data: result });
-    } catch(err) {
-        res.json({ status: false, data: err });
+        res.json({ status: true, data: result })
+    } catch(err){
+        res.json({ status:false, data: err })
     }
 }
 
@@ -33,7 +33,7 @@ exports.create = async(req, res) => {
         name: req.body.name,
         surname: req.body.surname,
         email: req.body.email,
-        address: {
+        address:{
             area: req.body.area,
             road: req.body.road
         }
@@ -43,9 +43,9 @@ exports.create = async(req, res) => {
 
     try {
         const result = await newUser.save();
-        res.json({ status: true, data: result});
+        res.json({ status:true, data: result});
     } catch (err) {
-        res.json({ status: false, data: err});
+        res.json({status: false, data: err})
     }
 }
 
@@ -66,23 +66,24 @@ exports.update = async(req, res) => {
     try {
         const result = await User.findOneAndUpdate(
             {username: username},
-            updateUser
+            updateUser, 
+            { new: true }
         )
         res.json({status: true, data: result});
     } catch (err) {
-        res.json({status: false, data: err});
+        res.json({status: false, data: err})
     }
 }
 
-exports.delete = async(req, res) => {
+exports.delete = async(req, res) =>{
     const username = req.params.username;
 
-    console.log("Delete user with username ", username);
+    console.log("Delete user with username", username);
 
     try {
         const result = await User.findOneAndDelete({username: username})
-        res.json({status: true, data: result});
-    } catch(err) {
-        res.json({ status: false, data: err});
+        res.json({ status: true, data: result});
+    } catch (err) {
+        res.json({ status: false, data: result});
     }
 }

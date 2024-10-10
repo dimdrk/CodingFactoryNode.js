@@ -6,11 +6,11 @@ exports.options = {
     "info": {
         "version": "1.0.0",
         "title": "Products CRUD API",
-        "description": "Products and Users application",
-        "contact": {
-            "name": "Coding Family",
+        "description": "Products and Users apllication",
+        "constact": {
+            "name": "Coding Factory",
             "url": "https://www.example.com",
-            "email": "support@example.com"
+            "email":"support@example.com"
         }
     },
     "components": {
@@ -39,7 +39,7 @@ exports.options = {
         }
     ],
     "paths": {
-        "/api/user": {
+        "/api/users":{
             "get": {
                 "tags": ["Users"],
                 "description": "Returns all users",
@@ -48,8 +48,8 @@ exports.options = {
                         "description": "List of all users",
                         "content":{
                             "application/json":{
-                                "schema": {
-                                    "type": "array",
+                                "schema":{
+                                    "type":"array",
                                     "items": {
                                         "$ref": "#/components/schemas/User"
                                     }
@@ -67,22 +67,22 @@ exports.options = {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
+                                "type":"object",
                                 "properties": {
                                     "username": {"type": "string"},
                                     "password": {"type": "string"},
                                     "name": {"type": "string"},
                                     "surname": {"type": "string"},
-                                    "email": {"type": "string"},
-                                    "address": {
-                                        "type": "object",
+                                    "email": {"type":"string"},
+                                    "address":{
+                                        "type":"object",
                                         "properties": {
                                             "area": {"type": "string"},
-                                            "road": {"type": "string"}
+                                            "road": {"type":"string"}
                                         }
                                     },
-                                    "phone": {
-                                        "type": "array",
+                                    "phone":{
+                                        "type":"array",
                                         "items": {
                                             "type": "object",
                                             "properties": {
@@ -99,60 +99,60 @@ exports.options = {
                 },
                 "responses": {
                     "200": {
-                        "description": "New user is created"                        
+                        "description": "New user is created"
                     }
                 }
             }
         },
-        "/api/user/{username}": {
-            "get": {
+        "/api/users/{username}":{
+            "get":{
                 "tags": ["Users"],
-                "parameters": [
+                "parameters":[
                     {
-                        "name": "username",
-                        "in": "path",
+                        "name":"username",
+                        "in":"path",
                         "required": true,
                         "description": "Username of user that we want to find",
-                        "type": "string"
+                        "type":"string"
                     }
                 ],
                 "description": "Get user with specific username",
                 "responses": {
-                    "200": {
+                    "200":{
                         "description": "User result",
-                        "schema": {
+                        "schema":{
                             "$ref": "#/components/schemas/User"
                         }
                     }
                 }
             },
-            "patch": {
-                "tags": ["Users"],
+            "patch":{
+                "tags":["Users"],
                 "description": "Update user",
-                "parameters": [
+                "parameters":[
                     {
                         "name": "username",
                         "in": "path",
                         "required": true,
                         "description": "Username of user that we want to update",
-                        "type": "string"
+                        "type":"string"
                     }
                 ],
-                "requestBody": {
+                "requestBody":{
                     "description": "User to update",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {"type": "string"},
-                                    "surname": {"type": "string"},
-                                    "email": {"type": "string"},
-                                    "address": {
-                                        "type": "object",
-                                        "properties": {
-                                            "area": {"type": "string"},
-                                            "road": {"type": "string"}
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "name":{"type":"string"},
+                                    "surname":{"type":"string"},
+                                    "email": {"type":"string"},
+                                    "address":{
+                                        "type":"object",
+                                        "properties":{
+                                            "area":{"type":"string"},
+                                            "road":{"type":"string"}
                                         }
                                     }
                                 },
@@ -161,105 +161,105 @@ exports.options = {
                         }
                     }
                 },
-                "responses": {
-                    "200": {
+                "responses":{
+                    "200":{
                         "description": "Update user",
-                        "schema": {
-                            "$ref": "#/components/schema/user"
+                        "schema":{
+                            "$ref":"#/components/schema/User"
                         }
                     }
                 }
             },
-            "delete": {
-                "tags": ["Users"],
+            "delete":{
+                "tags":["Users"],
                 "description": "Deletes user",
-                "parameters": [
+                "parameters":[
                     {
-                        "name": "username",
-                        "in": "path",
-                        "required": true,
+                        "name":"username",
+                        "in":"path",
+                        "required":true,
                         "description": "Username of user that we want to delete",
-                        "type": "string"
+                        "type":"string"
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "Delete a user"
+                "responses":{
+                    "200":{
+                        "description":"Delete a user"
                     }
                 }
             }
         },
-        "/api/user-product/users/products": {
-            "get": {
+        "/api/user-product/users/products":{
+            "get":{
                 "tags": ["Users and Products"],
                 "description": "Returns all users with their products",
-                "responses": {
-                    "200": {
-                        "description": "All users with their products"
+                "responses":{
+                    "200":{
+                        "description":"All users with their products"
                     }
                 }
-            }            
+            }
         },
-        "/api/user-product/{username}/products": {
-            "get": {
-                "tags": ["Users and Products"],
-                "parameters": [
+        "/api/user-product/{username}/products":{
+            "get":{
+                "tags":["Users and Products"],
+                "parameters":[
                     {
-                        "name": "username",
-                        "in": "path",
-                        "required": true,
-                        "description": "Username of user to find products",
-                        "type:": "string"
+                        "name":"username",
+                        "in":"path",
+                        "required":true,
+                        "description":"Username of user to find products",
+                        "type":"string"
                     }
                 ],
-                "description": "Username and products",
-                "responses": {
-                    "200": {
-                        "description": "User and Products to find"
+                "description":"Username and Products",
+                "responses":{
+                    "200":{
+                        "description":"User and Products to find"
                     }
-                }
+                }             
             },
-            "post": {
-                "tags": ["Users and Products"],
-                "description": "Username and products",
-                "parameters": [
+            "post":{
+                "tags":["Users and Products"],
+                "description": "Add new products to user",
+                "parameters":[
                     {
-                        "name": "username",
-                        "in": "path",
-                        "required": true,
-                        "description": "Username of user to update products",
-                        "type:": "string"
+                        "name":"username",
+                        "in":"path",
+                        "required":true,
+                        "description":"Username of user to find products",
+                        "type":"string"
                     }
                 ],
-                "requestBody": {
+                "requestBody":{
                     "description": "Data to add products",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                        "username": {"type": "string"},
-                                        "products": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "Object",
-                                                "properties": {
-                                                    "product": {"type": "string"},
-                                                    "cost": {"type": "number"},
-                                                    "quantity": {"type": "number"}
-                                                }
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "username":{"type":"string"},
+                                    "products": {
+                                        "type":"array",
+                                        "items":{
+                                            "type":"object",
+                                            "properties":{
+                                                "product":{"type":"string"},
+                                                "cost":{"type":"number"},
+                                                "quantity":{"type":"number"}
                                             }
                                         }
-                                    },
-                                    "required": ["quantity"]
-                                }
+                                    }
+                                },
+                                "required":["quantity"]
                             }
                         }
                     }
-                },                
-                "responses": {
-                    "200": {
-                        "description": "New products to user"
+                },
+                "responses":{
+                    "200":{
+                        "description":"New products to user"
+                    }
                 }
             }
         },
@@ -269,41 +269,41 @@ exports.options = {
                 "description": "Update user's product",
                 "parameters": [
                     {
-                        "name": "username",
-                        "in": "path",
+                        "name":"username",
+                        "in":"path",
                         "required": true,
-                        "description": "Username of user",
-                        "type": "string"
+                        "description": "Username ot user",
+                        "type":"string"
                     },
                     {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "description": "Id of product to update",
-                        "type": "string"
+                        "name":"id",
+                        "in":"path",
+                        "required":true,
+                        "description":"Id of product to update",
+                        "type":"string"
                     }
                 ],
-                "requestBody": {
-                    "description": "quantity of product to update",
-                    "content": {
-                        "application/json": {
+                "requestBody":{
+                    "description":"Quantity of product to update",
+                    "content":{
+                        "application/json":{
                             "schema": {
                                 "type": "object",
-                                "properties": {
+                                "properties":{
                                     "product":{
-                                        "type": "object",
-                                        "properties": {
-                                            "quantity": { "type": "number" }
+                                        "type":"object",
+                                        "properties":{
+                                            "quantity": {"type":"number"}
                                         }
                                     }
                                 }
                             }
                         }
-                    } 
+                    }
                 },
-                "responses": {
-                    "200": {
-                        "description": "Update product from user"
+                "responses":{
+                    "200":{
+                        "description":"Update product from user",
                     }
                 }
             }

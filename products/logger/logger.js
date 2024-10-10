@@ -9,7 +9,7 @@ const CATEGORY = "winston custom format";
 const fileRotateTransport = new transports.DailyRotateFile({
     filename: "logs/rotate-%DATE%.logs",
     datePattern: "DD-MM-YYYY",
-    maxFiles: "14d"
+    maxFiles:"14d",
 })
 
 const logger = createLogger({
@@ -18,7 +18,7 @@ const logger = createLogger({
         timestamp({
             format: "DD-MM-YYYY HH:mm:ss"
         }),
-        //prettyPrint()
+        // prettyPrint()
         format.json()
     ),
     transports:[
@@ -28,12 +28,12 @@ const logger = createLogger({
             filename: "logs/example.log"
         }),
         new transports.File({
-            level: "error",
+            level: "warn",
             filename: "logs/error.log"
         }),
         new transports.Console(),
         new transports.MongoDB({
-            level: "error",
+            level:"error",
             db: process.env.MONGODB_URI,
             collection: "logs",
             format: format.combine(
