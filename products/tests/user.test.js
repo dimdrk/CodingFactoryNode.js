@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const request = require("supertest");
 const app = require('../index');
+const helpers = require('../services/user.service');
 
 beforeEach(async () => {
     await mongoose.connect(process.env.MONGODB_URI)
@@ -45,16 +46,20 @@ describe("Tests for /api/users requests", () => {
 
 describe("For /api/users/{username} requests", () => {
     it("GET /api/users/{username}", async() => {
-        const result = await request(app).get("/api/users/test4");
+        const res = await helpers.findLastInsertedUser();
+        console.log(res.username);
+        const result = await request(app).get('/api/users/' + res.username);
 
         expect(result.statusCode).toBe(200);
         expect(result.body.status).toBeTruthy();
-        expect(result.body.data.username).toBe('test4');
-        expect(result.body.data.email).toBe('test4@aueb.gr');
+        expect(result.body.data.username).toBe(res.username);
+        expect(result.body.data.email).toBe(res.email);
     }, 10000);
 
     it("DELETE /api/users/{username}", async() => {
-        const result = await request(app).delete("/api/users/test4");
+        const res = await helpers.findLastInsertedUser();
+        console.log(res.username);
+        const result = await request(app).delete('/api/users/' + res.username);
 
         expect(result.statusCode).toBe(200);
         expect(result.body.status).toBeTruthy();
