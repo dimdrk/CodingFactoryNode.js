@@ -58,25 +58,38 @@ describe("Tests for /api/user-product/{username}}/products requests", () => {
 
 describe("Tests for /api/user-product/{username}/products/{id} requests", () => {
     it("PATCH for /api/user-product/{username}/products/{id}", async() => {
-        const res = await helpers.findLastInsertedUser();
-        const username = res.username;
+        let result = await helpers.findLastInsertedUser();
+        const username = result.username;
         // const res = await helpers.findUsersProduct('user3', "670e617f6a0f86424599fe84");
         const product = await helpers.findUsersProduct(username);
         // username = res.username;
         // id = res.products[0]._id;
         id = product.products[0]._id;
-        console.log('>>>>>>>>>', username, id);
 
-        const result = await request(app)
+        const res = await request(app)
             .patch('/api/user-product/' + username + '/products/' + id)
             .send({
-                username: res.username,
+                username: result.username,
                 product: {
                     quantity: 180
                 }
             })
+        result = await helpers.findLastInsertedUser();
+        expect(res.statusCode).toBe(200);
+        expect(result.products[0].quantity).toBe(180);
+    });
 
-        expect(result.statusCode).toBe(200);
-        expect(result.body.status).toBeTruthy();
+    it("DELETE for /api/user-product/{username}/products/{id}", async() => {
+        let result = await helpers.findLastInsertedUser();
+        const username = result.username;
+        const id = result.products[0]._id;
+
+        const res = await request(app)
+            .delete('/api/user-product/' + username + '/products/' + id)
+
+        result = await helpers.findLastInsertedUser();
+        console.log(result);
+        expect(res.statusCode).toBe(200);
+        expect(result.products.length).toBe(0);
     });
 });
